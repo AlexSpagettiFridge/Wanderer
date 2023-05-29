@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://rkpeh08t2ar5"]
+
+[ext_resource type="Script" path="res://Scr/Entities/Hero.cs" id="1_f7q88"]
+[ext_resource type="Texture2D" uid="uid://ik2f1wcpi2et" path="res://icon.svg" id="2_c2bli"]
+[ext_resource type="Script" path="res://Scr/UI/GameUserInterface.cs" id="3_p4id2"]
+[ext_resource type="PackedScene" uid="uid://bov56evh8x3ml" path="res://Scene/UI/player_inventory.tscn" id="4_hy1my"]
+[ext_resource type="PackedScene" uid="uid://ch2m4pxrbi68h" path="res://Scene/ground_tile.tscn" id="5_4u3t0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i31le"]
+size = Vector2(32, 32)
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Hero" type="CharacterBody2D" parent="."]
+script = ExtResource("1_f7q88")
+
+[node name="Icon" type="Sprite2D" parent="Hero"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_c2bli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hero"]
+shape = SubResource("RectangleShape2D_i31le")
+
+[node name="Camera2D" type="Camera2D" parent="Hero"]
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Gui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_p4id2")
+psInventoryWindow = ExtResource("4_hy1my")
+
+[node name="GroundTile" parent="." instance=ExtResource("5_4u3t0")]
+position = Vector2(24, 63)

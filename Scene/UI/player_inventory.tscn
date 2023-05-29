@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bov56evh8x3ml"]
+
+[ext_resource type="Script" path="res://Scr/UI/Inventory.cs" id="1_fsolc"]
+[ext_resource type="Script" path="res://Scr/UI/PlayerInventoryWindow.cs" id="1_igk56"]
+[ext_resource type="Theme" uid="uid://cot5dkla4hfc8" path="res://Gfx/UI/UITheme.tres" id="1_uk5vj"]
+
+[node name="PlayerInventory" type="CenterContainer" node_paths=PackedStringArray("playerInventory")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uk5vj")
+script = ExtResource("1_igk56")
+playerInventory = NodePath("Panel/MarginContainer/VBoxContainer/Inventory")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(800, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+
+[node name="Inventory" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 11
+script = ExtResource("1_fsolc")

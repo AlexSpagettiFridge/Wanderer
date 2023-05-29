@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://ch2m4pxrbi68h"]
+
+[ext_resource type="Script" path="res://Scr/Entities/Enviroment/GroundTile.cs" id="1_to5ql"]
+[ext_resource type="Texture2D" uid="uid://cg0xaegkl1jky" path="res://Gfx/Enviroment/Stones.png" id="2_38vx7"]
+
+[sub_resource type="Animation" id="Animation_pnyrp"]
+resource_name = "Instance"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/CanvasModulate:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(400, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_dw4im"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/CanvasModulate:color:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cx3tq"]
+_data = {
+"Instance": SubResource("Animation_pnyrp"),
+"RESET": SubResource("Animation_dw4im")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m1xp7"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_qno0k"]
+colors = PackedColorArray(0.11138, 0.235356, 0.169232, 1, 0.304487, 0.189354, 0.323724, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_warpl"]
+gradient = SubResource("Gradient_qno0k")
+
+[node name="GroundTile" type="Node2D" node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("1_to5ql")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cx3tq")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -100
+offset_right = 800.0
+offset_bottom = 1000.0
+texture = SubResource("ViewportTexture_m1xp7")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(800, 1000)
+
+[node name="FloorTexture" type="TextureRect" parent="SubViewport"]
+z_index = -99
+offset_right = 800.0
+offset_bottom = 800.0
+texture = ExtResource("2_38vx7")
+stretch_mode = 1
+
+[node name="GroundSide" type="TextureRect" parent="SubViewport"]
+z_index = -100
+offset_left = 800.0
+offset_top = 800.0
+offset_right = 1056.0
+offset_bottom = 1600.0
+rotation = 1.5708
+texture = SubResource("GradientTexture1D_warpl")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="SubViewport"]
