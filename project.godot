@@ -15,6 +15,10 @@ run/main_scene="res://Scene/test_scene.tscn"
 config/features=PackedStringArray("4.0", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameData="*res://Scr/Info/GameData.cs"
+
 [dotnet]
 
 project/assembly_name="Wanderer"

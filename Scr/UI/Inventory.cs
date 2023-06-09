@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using Wanderer.Items;
 
 namespace Wanderer.UI
 {
@@ -15,11 +17,11 @@ namespace Wanderer.UI
 
         }
 
-        public void InstanceInventoryItems(int itemCount)
+        public void InstanceInventoryItems(List<InventorySlot> inventorySlot)
         {
             if (!Engine.IsEditorHint())
             {
-                for (int itemIndex = 0; itemIndex < itemCount; itemIndex++)
+                for (int itemIndex = 0; itemIndex < inventorySlot.Count; itemIndex++)
                 {
                     InventoryItem ii = new InventoryItem();
                     AddChild(ii);
