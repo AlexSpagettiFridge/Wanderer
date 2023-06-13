@@ -17,13 +17,13 @@ namespace Wanderer.UI
 
         }
 
-        public void InstanceInventoryItems(List<InventorySlot> inventorySlot)
+        public void InstanceInventoryItems(List<InventorySlot> inventorySlots)
         {
             if (!Engine.IsEditorHint())
             {
-                for (int itemIndex = 0; itemIndex < inventorySlot.Count; itemIndex++)
+                for (int itemIndex = 0; itemIndex < inventorySlots.Count; itemIndex++)
                 {
-                    InventoryItem ii = new InventoryItem();
+                    InventoryItem ii = new InventoryItem(inventorySlots[itemIndex]);
                     AddChild(ii);
                 }
             }

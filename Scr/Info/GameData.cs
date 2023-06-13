@@ -4,7 +4,7 @@ namespace Wanderer.Info
 {
     internal partial class GameData: Node
     {
-        HeroData HeroData;
+        internal HeroData HeroData;
 
         public override void _Ready()
         {

@@ -1,8 +1,9 @@
 using Godot;
+using Wanderer.Info;
 
 namespace Wanderer
 {
-    public static class Util
+    internal static class Util
     {
         public static Theme GetInheritedTheme(Control control)
         {
@@ -12,5 +13,7 @@ namespace Wanderer
             }
             return GetInheritedTheme(control);
         }
+
+        public static GameData GetGameData() => new Node().GetNode<GameData>("/root/GameData");
     }
 }

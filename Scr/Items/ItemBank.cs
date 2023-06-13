@@ -1,6 +1,8 @@
 using Godot;
 using System.Collections.Generic;
 using Wanderer.Items.GameItems;
+using System.Linq;
+using System;
 
 namespace Wanderer.Items
 {
@@ -21,5 +23,9 @@ namespace Wanderer.Items
             handlers.Add(handler);
             handler.Id = handlers.Count - 1;
         }
+
+        public static ItemHandler GetHandler(Predicate<ItemHandler> predicate) => handlers.Find(predicate);
+        public static List<ItemHandler> GetHandlers(Predicate<ItemHandler> predicate) => handlers.FindAll(predicate);
+        public static ItemHandler GetHandlerByName(string name) => GetHandler((x) => x.Name == name);
     }
 }
