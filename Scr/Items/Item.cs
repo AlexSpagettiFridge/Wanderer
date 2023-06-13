@@ -6,7 +6,7 @@ namespace Wanderer.Items
         private ItemHandler itemHandler;
         private int id;
         public Gictionary SpecificData = new Gictionary();
-        public ItemHandler GetItemHandler() => itemHandler;
+        public ItemHandler GetHandler() => itemHandler;
 
         public Item(ItemHandler itemHandler)
         {

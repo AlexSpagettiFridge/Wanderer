@@ -17,6 +17,10 @@ namespace Wanderer.Info
             ItemBank.Init();
             Storage = new ItemStorage(12);
             Storage.GiveItem(ItemBank.GetHandlerByName("Test").CreateItem());
+            Storage.GiveItem(ItemBank.GetHandlerByName("SmallTest").CreateItem());
+            Storage.GiveItem(ItemBank.GetHandlerByName("SmallTest").CreateItem());
+            Storage.GiveItem(ItemBank.GetHandlerByName("SmallTest").CreateItem());
+            Storage.GiveItem(ItemBank.GetHandlerByName("Test").CreateItem());
         }
 
         

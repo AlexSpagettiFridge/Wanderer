@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Wanderer.Items
 {
@@ -30,10 +29,12 @@ namespace Wanderer.Items
                 {
                     for (int index = originalCount - 1; index > value - 1; index--)
                     {
-                        Item droppedSlotItem = inventory[index - 1].Item;
-                        if (droppedSlotItem != null)
+                        foreach (Item droppedSlotItem in inventory[index - 1].Items)
                         {
-                            droppedItems.Add(droppedSlotItem);
+                            if (droppedSlotItem != null)
+                            {
+                                droppedItems.Add(droppedSlotItem);
+                            }
                         }
                         inventory.Remove(inventory[index - 1]);
                     }
@@ -43,10 +44,12 @@ namespace Wanderer.Items
 
         public bool GiveItem(Item item)
         {
-            InventorySlot freeSlot = inventory.Find((x)=>x.Item==null);
-            if (freeSlot!=null)
+            foreach(InventorySlot slot in inventory)
             {
-                freeSlot.Item = item;
+                if (slot.TryInsertItem(item))
+                {
+                    return true;
+                }
             }
             return false;
         }

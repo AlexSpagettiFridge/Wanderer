@@ -16,6 +16,7 @@ namespace Wanderer.Items
             SpriteFrames itemSprites = ResourceLoader.Load<SpriteFrames>("res://Gfx/Items/Items.tres");
 
             AddItemHandler(new BasicItemHandler("Test",itemSprites.GetFrameTexture("Items32",0)));
+            AddItemHandler(new BasicItemHandler("SmallTest",itemSprites.GetFrameTexture("Items32",0),true));
         }
 
         public static void AddItemHandler(ItemHandler handler)
