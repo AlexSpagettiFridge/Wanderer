@@ -46,7 +46,7 @@ namespace Wanderer.Items
         {
             foreach(InventorySlot slot in inventory)
             {
-                if (slot.TryInsertItem(item))
+                if (slot.TryInsertItem(item)==InventorySlot.TryInsertResult.Success)
                 {
                     return true;
                 }

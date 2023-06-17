@@ -1,10 +1,14 @@
 using System;
+using System.Linq;
 namespace Wanderer.Items
 {
     internal class InventorySlot
     {
         private Item[] items = new Item[1];
         private Predicate<Item> requirements = null;
+        public int ItemAmount => items.Count(x => x != null);
+
+        public event EventHandler<Item[]> ItemChanged;
 
         public InventorySlot(Predicate<Item> requirements = null)
         {
@@ -16,14 +20,16 @@ namespace Wanderer.Items
             get => items;
         }
 
-        public bool TryInsertItem(Item item)
+        public bool DoesItemMeetRequirements(Item item) => requirements.Invoke(item);
+
+        public TryInsertResult TryInsertItem(Item item)
         {
             if (requirements != null)
             {
-                if (!requirements.Invoke(item)) { return false; }
+                if (!DoesItemMeetRequirements(item)) { return TryInsertResult.DoesNotMeet; }
             }
             bool isItemSmall = item.GetHandler().IsSmall;
-            if (IsQuadSlot && !isItemSmall) { return false; }
+            if (IsQuadSlot && !isItemSmall) { return TryInsertResult.WrongSize; }
 
             for (int i = 0; i < Items.Length; i++)
             {
@@ -31,31 +37,66 @@ namespace Wanderer.Items
                 if (isItemSmall) { IsQuadSlot = true; }
                 items[i] = item;
                 ItemChanged?.Invoke(this, items);
-                return true;
+                return TryInsertResult.Success;
             }
 
-            return false;
+            return TryInsertResult.Full;
         }
 
-        public void RemoveItem(Item item)
+        public void ForceInsertItem(Item item)
         {
-            bool isEmpty = true;
+            for (int i = 0; i < Items.Length; i++)
+            {
+                if (Items[i] != null) { continue; }
+                if (item.GetHandler().IsSmall) { IsQuadSlot = true; }
+                items[i] = item;
+                ItemChanged?.Invoke(this, items);
+                return;
+            }
+            RemoveItem(items[0]);
+            if (item.GetHandler().IsSmall) { IsQuadSlot = true; }
+            items[0] = item;
+            ItemChanged?.Invoke(this, items);
+        }
+
+        public bool TrySwappingItems(Item localItem, Item tradeItem, ref InventorySlot tradeSlot)
+        {
+            if (!DoesItemMeetRequirements(tradeItem) || !tradeSlot.DoesItemMeetRequirements(localItem)) { return false; }
+            //Find out if Slot Amount is Compatible;
+            if (IsQuadSlot != tradeSlot.IsQuadSlot)
+            {
+                if (IsQuadSlot && ItemAmount > 1) { return false; }
+                if (tradeSlot.IsQuadSlot && tradeSlot.ItemAmount > 1) { return false; }
+            }
+            RemoveItem(localItem);
+            tradeSlot.RemoveItem(tradeItem);
+            ForceInsertItem(tradeItem);
+            tradeSlot.ForceInsertItem(localItem);
+            return true;
+        }
+
+        public void RemoveItem(Item item, bool ignoreError = false)
+        {
+            bool isEmpty = true, isRemoved = false;
             for (int i = 0; i < Items.Length; i++)
             {
                 if (items[i] != null)
                 {
-                    if (items[i] == item)
+                    if (items[i].Equals(item) && !isRemoved)
                     {
                         items[i] = null;
+                        isRemoved = true;
                         continue;
                     }
+                    isEmpty = false;
                 }
-                isEmpty = false;
+                
             }
             if (isEmpty)
             {
-                IsQuadSlot = true;
+                IsQuadSlot = false;
             }
+            if (!isRemoved && !ignoreError) { throw new Exception($"Item '{item.ToString()}' for Removal not found"); }
             ItemChanged?.Invoke(this, items);
         }
 
@@ -81,6 +122,10 @@ namespace Wanderer.Items
         }
 
         public delegate bool CheckItem(Item item);
-        public event EventHandler<Item[]> ItemChanged;
+
+        public enum TryInsertResult
+        {
+            Success, DoesNotMeet, Full, WrongSize
+        }
     }
 }
