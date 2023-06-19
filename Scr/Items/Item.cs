@@ -50,5 +50,10 @@ namespace Wanderer.Items
         {
             return GetHandler().Name;
         }
+
+        public override int GetHashCode()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
