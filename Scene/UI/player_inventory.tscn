@@ -40,4 +40,5 @@ text = "Inventory"
 [node name="Inventory" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+columns = 11
 script = ExtResource("1_fsolc")

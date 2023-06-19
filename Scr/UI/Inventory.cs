@@ -8,13 +8,13 @@ namespace Wanderer.UI
     [Tool]
     internal partial class Inventory : GridContainer
     {
-        private Vector2 themeSeperators = new Vector2();
+        private Vector2 themeSeparation = new Vector2();
 
         public override void _Ready()
         {
             Resized += OnResize;
             OnResize();
-
+            OnThemeChanged();
         }
 
         public void InstanceInventoryItems(List<InventorySlot> inventorySlots)
@@ -31,13 +31,14 @@ namespace Wanderer.UI
 
         public override void _Draw()
         {
+            Vector2 size = new Vector2(64, 64);
             if (Engine.IsEditorHint())
             {
-                for (int x = 0; x < Columns; x++)
+                for (float x = 64; x <= Size.X; x += 64 + themeSeparation.X)
                 {
-                    for (int y = 0; y < Math.Floor(Size.Y / (64 + Theme.GetConstant("v_seperator", "GridContainer"))) / 64; y++)
+                    for (float y = 64; y <= Size.Y; y += 64 + themeSeparation.Y)
                     {
-                        DrawRect(new Rect2(x * 64, y * 64, 64, 64), new Color(1, 1, 1, 1), false, 2);
+                        DrawRect(new Rect2(new Vector2(x, y) - size, size), new Color(1, 1, 1, 1), false, 2);
                     }
                 }
             }
@@ -45,14 +46,16 @@ namespace Wanderer.UI
 
         private void OnResize()
         {
-            Columns = (int)Math.Max(1 + Math.Floor((Size.X - 64) / (64 + themeSeperators.X)), 1);
+            Columns = (int)Math.Max(1 + Math.Floor((Size.X - 64) / (64 + themeSeparation.X)), 1);
+            QueueRedraw();
         }
 
         private void OnThemeChanged()
         {
             Theme inheritedTheme = Util.GetInheritedTheme(this);
-            themeSeperators.X = inheritedTheme.GetConstant("h_seperator", "GridContainer");
-            themeSeperators.Y = inheritedTheme.GetConstant("v_seperator", "GridContainer");
+            themeSeparation.X = inheritedTheme.GetConstant("h_separation", "GridContainer");
+            themeSeparation.Y = inheritedTheme.GetConstant("v_separation", "GridContainer");
+            GD.Print(themeSeparation);
         }
     }
 

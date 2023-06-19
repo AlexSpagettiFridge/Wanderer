@@ -11,7 +11,7 @@ namespace Wanderer
             {
                 return control.Theme;
             }
-            return GetInheritedTheme(control);
+            return GetInheritedTheme(control.GetParent<Control>());
         }
 
         public static GameData GetGameData() => new Node().GetNode<GameData>("/root/GameData");
