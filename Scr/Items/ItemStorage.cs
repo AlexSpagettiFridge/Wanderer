@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Wanderer.Items
@@ -9,6 +10,15 @@ namespace Wanderer.Items
 
         public ItemStorage(int size)
         {
+            Size = size;
+        }
+
+        public ItemStorage(int size, List<Predicate<Item>> requirements)
+        {
+            foreach(Predicate<Item> requirement in requirements)
+            {
+                inventory.Add(new InventorySlot(requirement));
+            }
             Size = size;
         }
 
@@ -55,6 +65,13 @@ namespace Wanderer.Items
         }
 
         public List<InventorySlot> GetInventorySlots() => inventory;
+
+        public InventorySlot this[int x]
+        {
+            get => inventory[x];
+            set => inventory[x] = value;
+        }
+
         public List<Item> FlushDroppedItems()
         {
             List<Item> result = droppedItems;
