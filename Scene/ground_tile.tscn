@@ -60,7 +60,7 @@ _data = {
 "RESET": SubResource("Animation_dw4im")
 }
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_m1xp7"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_svrlj"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Gradient" id="Gradient_qno0k"]
@@ -82,7 +82,7 @@ libraries = {
 z_index = -100
 offset_right = 800.0
 offset_bottom = 1000.0
-texture = SubResource("ViewportTexture_m1xp7")
+texture = SubResource("ViewportTexture_svrlj")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(800, 1000)

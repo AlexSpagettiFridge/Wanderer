@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using Wanderer.Info;
+using Wanderer.Items;
+using Wanderer.Items.GameItems;
 
 namespace Wanderer.Entities
 {
@@ -17,7 +20,17 @@ namespace Wanderer.Entities
 
         public override void _UnhandledInput(InputEvent @event)
         {
-
+            if (@event.IsActionPressed("gm_skill1"))
+            {
+                Item weapon = GameData.Current.HeroData.Equipment[0].Items[0];
+                if (weapon != null)
+                {
+                    if (weapon.GetHandler() is WeaponHandler weaponHandler)
+                    {
+                        weaponHandler.Attack(this, weapon);
+                    }
+                }
+            }
         }
 
         public override void _Process(double delta)

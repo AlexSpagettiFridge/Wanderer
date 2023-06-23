@@ -15,7 +15,7 @@ namespace Wanderer.Items
 
         public ItemStorage(int size, List<Predicate<Item>> requirements)
         {
-            foreach(Predicate<Item> requirement in requirements)
+            foreach (Predicate<Item> requirement in requirements)
             {
                 inventory.Add(new InventorySlot(requirement));
             }
@@ -30,7 +30,7 @@ namespace Wanderer.Items
                 int originalCount = inventory.Count;
                 if (value > originalCount)
                 {
-                    for (int index = originalCount - 1; index < value; index++)
+                    for (int index = originalCount - 1; index < value - 1; index++)
                     {
                         inventory.Add(new InventorySlot());
                     }
@@ -54,9 +54,9 @@ namespace Wanderer.Items
 
         public bool GiveItem(Item item)
         {
-            foreach(InventorySlot slot in inventory)
+            foreach (InventorySlot slot in inventory)
             {
-                if (slot.TryInsertItem(item)==InventorySlot.TryInsertResult.Success)
+                if (slot.TryInsertItem(item) == InventorySlot.TryInsertResult.Success)
                 {
                     return true;
                 }

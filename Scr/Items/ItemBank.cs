@@ -14,9 +14,10 @@ namespace Wanderer.Items
         {
             handlers = new List<ItemHandler>();
             SpriteFrames itemSprites = ResourceLoader.Load<SpriteFrames>("res://Gfx/Items/Items.tres");
-
-            AddItemHandler(new BasicItemHandler("Test",itemSprites.GetFrameTexture("Items32",0)));
-            AddItemHandler(new BasicItemHandler("SmallTest",itemSprites.GetFrameTexture("Items32",0),true));
+            
+            AddItemHandler(new SwordHandler());
+            AddItemHandler(new BasicItemHandler("Test",itemSprites.GetFrameTexture("Items32",6)));
+            AddItemHandler(new BasicItemHandler("SmallTest",itemSprites.GetFrameTexture("Items32",1),true));
         }
 
         public static void AddItemHandler(ItemHandler handler)

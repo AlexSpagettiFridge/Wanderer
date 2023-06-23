@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scr/UI/PlayerInventoryWindow.cs" id="1_igk56"]
 [ext_resource type="Theme" uid="uid://cot5dkla4hfc8" path="res://Gfx/UI/UITheme.tres" id="1_uk5vj"]
 
-[node name="PlayerInventory" type="CenterContainer" node_paths=PackedStringArray("playerInventory")]
+[node name="PlayerInventory" type="CenterContainer" node_paths=PackedStringArray("playerInventory", "equipment")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,6 +13,7 @@ grow_vertical = 2
 theme = ExtResource("1_uk5vj")
 script = ExtResource("1_igk56")
 playerInventory = NodePath("Panel/MarginContainer/VBoxContainer/Inventory")
+equipment = NodePath("Panel/MarginContainer/VBoxContainer/Equipment")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(800, 500)
@@ -36,6 +37,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Inventory"
+
+[node name="Equipment" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+columns = 11
+script = ExtResource("1_fsolc")
 
 [node name="Inventory" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
