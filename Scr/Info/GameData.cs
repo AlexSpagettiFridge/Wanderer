@@ -4,13 +4,11 @@ namespace Wanderer.Info
 {
     internal partial class GameData : Node
     {
-        public static GameData Current;
-
         internal HeroData HeroData;
 
         internal GameData()
         {
-            Current=this;
+            Util.RegisterRoot(GetParent());
         }
 
         public override void _Ready()

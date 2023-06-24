@@ -22,7 +22,7 @@ namespace Wanderer.Entities
         {
             if (@event.IsActionPressed("gm_skill1"))
             {
-                Item weapon = GameData.Current.HeroData.Equipment[0].Items[0];
+                Item weapon = Util.GameData.HeroData.Equipment[0].Items[0];
                 if (weapon != null)
                 {
                     if (weapon.GetHandler() is WeaponHandler weaponHandler)
