@@ -9,7 +9,6 @@ namespace Wanderer.Items
     internal class Item
     {
         private static int nextId = 0;
-
         private readonly int id;
         private ItemHandler itemHandler;
         private string specificData = "";
