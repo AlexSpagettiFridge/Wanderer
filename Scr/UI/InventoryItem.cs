@@ -56,14 +56,14 @@ namespace Wanderer.Ui
                 {
                     if (inventorySlot.Items[i] != null)
                     {
-                        Texture2D quadTexture = inventorySlot.Items[i].GetHandler().GetTexture();
+                        Texture2D quadTexture = inventorySlot.Items[i].IconTexture;
                         DrawTextureRect(quadTexture, new Rect2(texturePosition[i], quadSize), false);
                     }
                 }
                 return;
             }
             if (inventorySlot.Items[0] == null) { return; }
-            Texture2D itemTexture = inventorySlot.Items[0].GetHandler().GetTexture();
+            Texture2D itemTexture = inventorySlot.Items[0].IconTexture;
 
             DrawTextureRect(itemTexture, new Rect2(new Vector2(2, 2), Size - new Vector2(4, 4)), false);
         }

@@ -13,6 +13,6 @@ namespace Wanderer.Items.GameItems
             GD.Print("Swert -|======>");
         }
 
-        public override Texture2D GetTexture() => spriteFrames.GetFrameTexture("Items32", 3);
+        public override Texture2D GetTexture(Item item) => spriteFrames.GetFrameTexture("Items32", 3);
     }
 }

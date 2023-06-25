@@ -23,7 +23,6 @@ namespace Wanderer.Items
         public static void AddItemHandler(ItemHandler handler)
         {
             handlers.Add(handler);
-            handler.Id = handlers.Count - 1;
         }
 
         public static ItemHandler GetHandler(Predicate<ItemHandler> predicate) => handlers.Find(predicate);

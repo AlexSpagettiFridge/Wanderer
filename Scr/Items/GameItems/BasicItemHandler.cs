@@ -18,6 +18,6 @@ namespace Wanderer.Items.GameItems
             this.isSmall = isSmall;
         }
 
-        public override Texture2D GetTexture() => texture;
+        public override Texture2D GetTexture(Item item) => texture;
     }
 }
