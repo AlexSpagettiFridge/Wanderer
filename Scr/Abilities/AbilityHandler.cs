@@ -1,3 +1,5 @@
+using Wanderer.Entities;
+
 namespace Wanderer.Abilities
 {
     internal abstract class AbilityHandler
@@ -7,7 +9,8 @@ namespace Wanderer.Abilities
 
         public string Name => name;
         public int Id { get => id; set => id = value; }
-
-
+        public abstract void Invoke(Ability ability, Hero hero);
+        public abstract AbilityCost GetCost(Ability ability);
+        public abstract float GetCooldown(Ability ability);
     }
 }

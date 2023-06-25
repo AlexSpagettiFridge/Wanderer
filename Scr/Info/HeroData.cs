@@ -8,9 +8,7 @@ namespace Wanderer.Info
 {
     internal class HeroData
     {
-        private int hp;
-
-        public int Hp { get => hp; set => hp = value; }
+        public HeroResource Hp = new HeroResource(200),Stamina = new HeroResource(200);
         public ItemStorage Storage;
         public ItemStorage Equipment;
 
