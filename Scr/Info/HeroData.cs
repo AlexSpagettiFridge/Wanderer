@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Wanderer.Abilities;
 using Wanderer.Items;
 using Wanderer.Items.GameItems;
 
@@ -11,9 +12,15 @@ namespace Wanderer.Info
         public HeroResource Hp = new HeroResource(200),Stamina = new HeroResource(200);
         public ItemStorage Storage;
         public ItemStorage Equipment;
+        public Ability[] Abilities;
 
         internal HeroData()
         {
+            Abilities = new Ability[5];
+            for(int i=0;i<5;i++)
+            {
+                Abilities[i] = null;
+            }
             ItemBank.Init();
             Storage = new ItemStorage(12);
             Equipment = new ItemStorage(6);

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using Wanderer.Info;
 
-namespace Wanderer.UI
+namespace Wanderer.Ui
 {
     internal partial class PlayerInventoryWindow : Control
     {

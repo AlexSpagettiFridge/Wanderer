@@ -8,6 +8,7 @@ namespace Wanderer.Abilities
     {
         private AbilityHandler handler;
         public AbilityHandler GetHandler() => handler;
+        public int Id => handler.Id;
         private Item sourceItem;
         public bool TryInvoke(Hero hero)
         {

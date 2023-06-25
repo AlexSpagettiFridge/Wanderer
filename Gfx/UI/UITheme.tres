@@ -1,5 +1,87 @@
-[gd_resource type="Theme" format=3 uid="uid://cot5dkla4hfc8"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cot5dkla4hfc8"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_cb8bd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_414nc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t6gu"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7lcx"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.75, 0.75, 0.75, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3gx3"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bw07"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [resource]
 GridContainer/constants/h_separation = 4
 GridContainer/constants/v_separation = 4
+HScrollBar/icons/decrement = SubResource("ImageTexture_cb8bd")
+HScrollBar/icons/decrement_highlight = SubResource("ImageTexture_cb8bd")
+HScrollBar/icons/decrement_pressed = SubResource("ImageTexture_cb8bd")
+HScrollBar/icons/increment = SubResource("ImageTexture_cb8bd")
+HScrollBar/icons/increment_highlight = SubResource("ImageTexture_cb8bd")
+HScrollBar/icons/increment_pressed = SubResource("ImageTexture_cb8bd")
+HScrollBar/styles/grabber = SubResource("StyleBoxFlat_414nc")
+HScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_5t6gu")
+HScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_n7lcx")
+HScrollBar/styles/scroll = SubResource("StyleBoxFlat_a3gx3")
+HScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_3bw07")

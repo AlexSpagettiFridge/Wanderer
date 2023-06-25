@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Wanderer.Items;
 
-namespace Wanderer.UI
+namespace Wanderer.Ui
 {
     [Tool]
     internal partial class Inventory : GridContainer

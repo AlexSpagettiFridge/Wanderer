@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Wanderer.UI
+namespace Wanderer.Ui
 {
     internal partial class GameUserInterface : Control
     {

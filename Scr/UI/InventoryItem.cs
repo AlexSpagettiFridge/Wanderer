@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Wanderer.Items;
 
-namespace Wanderer.UI
+namespace Wanderer.Ui
 {
     internal partial class InventoryItem : Control
     {
