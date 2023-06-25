@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://csqilb7mk6x8p"]
+[gd_scene load_steps=2 format=3 uid="uid://csqilb7mk6x8p"]
 
 [ext_resource type="Theme" uid="uid://cot5dkla4hfc8" path="res://Gfx/UI/UITheme.tres" id="1_1rk46"]
-[ext_resource type="Script" path="res://Scr/UI/AbilitySlot.cs" id="1_1ueyu"]
 
 [node name="skill_window" type="CenterContainer"]
 anchors_preset = 15
@@ -40,27 +39,22 @@ layout_mode = 2
 [node name="AbilitySlot1" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-script = ExtResource("1_1ueyu")
 
 [node name="AbilitySlot2" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-script = ExtResource("1_1ueyu")
 
 [node name="AbilitySlot3" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-script = ExtResource("1_1ueyu")
 
 [node name="AbilitySlot4" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-script = ExtResource("1_1ueyu")
 
 [node name="AbilitySlot5" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
-script = ExtResource("1_1ueyu")
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2

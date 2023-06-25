@@ -10,6 +10,7 @@ namespace Wanderer
         internal static void RegisterRoot(Node root) { Util.root = root; }
         public static GameData GameData=> root.GetNode<GameData>("GameData");
         public static TimerService TimerService=> root.GetNode<TimerService>("TimerService");
+        public static string Tr(string stringName,string stringNameContext = null) => root.Tr(stringName,stringNameContext);
 
         public static Theme GetInheritedTheme(Control control)
         {
