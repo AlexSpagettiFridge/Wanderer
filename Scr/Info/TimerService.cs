@@ -2,7 +2,7 @@ using Godot;
 
 namespace Wanderer.Info
 {
-    internal class TimerService : Node
+    internal partial class TimerService : Node
     {
         public Timer AddTimer(float time)
         {
