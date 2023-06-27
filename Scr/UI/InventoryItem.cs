@@ -24,7 +24,7 @@ namespace Wanderer.Ui
         {
             this.inventorySlot = inventorySlot;
             inventorySlot.ItemChanged += OnItemChanged;
-            OnItemChanged(this, inventorySlot.Items);
+            OnItemChanged(this, null);
         }
 
         public override void _Ready()
@@ -33,7 +33,7 @@ namespace Wanderer.Ui
             Draw += _Draw;
         }
 
-        private void OnItemChanged(object sender, Item[] items)
+        private void OnItemChanged(object sender, InventorySlotChangedArgs args)
         {
             animation = inventorySlot.IsQuadSlot ? "quad" : "mono";
             QueueRedraw();

@@ -1,4 +1,6 @@
 using Godot;
+using Wanderer.Abilities;
+using Wanderer.Items;
 
 namespace Wanderer.Info
 {
@@ -8,11 +10,13 @@ namespace Wanderer.Info
 
         internal GameData()
         {
-            Util.RegisterRoot(GetParent());
+            ItemBank.Init();
+            AbilityBank.Init();
         }
 
         public override void _Ready()
         {
+            Util.RegisterRoot(GetParent());
             HeroData = new HeroData();
         }
     }

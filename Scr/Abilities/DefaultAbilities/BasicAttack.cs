@@ -5,10 +5,7 @@ namespace Wanderer.Abilities.DefaultAbilities
 {
     internal class BasicAttack : AbilityHandler
     {
-        public BasicAttack()
-        {
-            name = "attack";
-        }
+        public BasicAttack() : base("Attack") { }
 
         public override float GetCooldown(Ability ability) => 0.8f;
 

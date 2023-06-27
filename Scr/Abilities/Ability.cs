@@ -1,4 +1,6 @@
 using System;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Wanderer.Entities;
 using Wanderer.Items;
 
@@ -7,9 +9,16 @@ namespace Wanderer.Abilities
     internal class Ability
     {
         private AbilityHandler handler;
-        public AbilityHandler GetHandler() => handler;
-        public int Id => handler.Id;
+        public string HandlerName => handler.Name;
         private Item sourceItem;
+        public Item SourceItem => sourceItem;
+
+        public Ability(AbilityHandler handler, Item sourceItem = null)
+        {
+            this.handler = handler;
+            this.sourceItem = sourceItem;
+        }
+        public AbilityHandler GetHandler() => handler;
         public bool TryInvoke(Hero hero)
         {
             AbilityCost cost = handler.GetCost(this);
@@ -37,5 +46,20 @@ namespace Wanderer.Abilities
         public bool IsCoolingDown => isCooldownLocked;
         #endregion
 
+        #region Json
+        public JsonNode GetJson() => JsonSerializer.SerializeToNode(this);
+        public static Ability CreateFromJson(JsonDocument json)
+        {
+            JsonElement root = json.RootElement;
+            if (!root.TryGetProperty("HandlerName", out JsonElement handlerNameElement) ||
+                !root.TryGetProperty("SourceItem", out JsonElement sourceItemElement)
+            ) { return null; }
+
+            AbilityHandler abilityHandler = AbilityBank.GetByName(handlerNameElement.GetString());
+            Item sourceItem = Item.CreateFromJson(sourceItemElement);
+
+            return new Ability(abilityHandler, sourceItem);
+        }
+        #endregion
     }
 }

@@ -1,14 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://csqilb7mk6x8p"]
+[gd_scene load_steps=4 format=3 uid="uid://csqilb7mk6x8p"]
 
 [ext_resource type="Theme" uid="uid://cot5dkla4hfc8" path="res://Gfx/UI/UITheme.tres" id="1_1rk46"]
+[ext_resource type="Script" path="res://Scr/UI/SkillWindow/SkillWindow.cs" id="2_xwuql"]
+[ext_resource type="Script" path="res://Scr/UI/SkillWindow/AbilitySlot.cs" id="3_gjnog"]
 
-[node name="skill_window" type="CenterContainer"]
+[node name="skill_window" type="CenterContainer" node_paths=PackedStringArray("skillCardScroller")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1rk46")
+script = ExtResource("2_xwuql")
+skillCardScroller = NodePath("Panel/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer")
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(800, 500)
@@ -39,22 +43,31 @@ layout_mode = 2
 [node name="AbilitySlot1" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
+script = ExtResource("3_gjnog")
 
 [node name="AbilitySlot2" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
+script = ExtResource("3_gjnog")
+index = 1
 
 [node name="AbilitySlot3" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
+script = ExtResource("3_gjnog")
+index = 2
 
 [node name="AbilitySlot4" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
+script = ExtResource("3_gjnog")
+index = 3
 
 [node name="AbilitySlot5" type="Control" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 48)
 layout_mode = 2
+script = ExtResource("3_gjnog")
+index = 4
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2

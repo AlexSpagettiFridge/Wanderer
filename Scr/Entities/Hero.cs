@@ -25,7 +25,7 @@ namespace Wanderer.Entities
                 Item weapon = Util.GameData.HeroData.Equipment[0].Items[0];
                 if (weapon != null)
                 {
-                    if (weapon.GetHandler() is WeaponHandler weaponHandler)
+                    if (weapon.GetHandler() is ItemWeapon weaponHandler)
                     {
                         weaponHandler.Attack(this, weapon);
                     }

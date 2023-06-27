@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -8,6 +9,7 @@ namespace Wanderer.Items
 {
     internal class Item
     {
+        private static Dictionary<int, Item> loadedItems = new Dictionary<int, Item>();
         private static int nextId = 0;
         private readonly int id;
         private ItemHandler itemHandler;
@@ -25,9 +27,15 @@ namespace Wanderer.Items
             this.id = id;
             if (id == -1) { this.id = nextId; }
             nextId = Math.Max(nextId, this.id + 1);
+            loadedItems.Add(this.id, this);
         }
 
         public ItemHandler GetHandler() => itemHandler;
+
+        public void Unload()
+        {
+            loadedItems.Remove(id);
+        }
 
         #region Json
         public static Item CreateFromJson(JsonNode node) => CreateFromJson(JsonSerializer.SerializeToDocument(node));
@@ -36,6 +44,7 @@ namespace Wanderer.Items
         {
             if (!json.TryGetProperty("Id", out JsonElement idElement)) { return null; }
             int id = idElement.GetInt32();
+            if (loadedItems.ContainsKey(id)) { return loadedItems[id]; }
             if (!json.TryGetProperty("HandlerName", out JsonElement handlerElement)) { return null; }
             string name = handlerElement.GetString();
             Item jsonItem = new Item(ItemBank.GetHandlerByName(name), id);

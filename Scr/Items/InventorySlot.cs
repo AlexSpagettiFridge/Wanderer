@@ -8,7 +8,7 @@ namespace Wanderer.Items
         private Predicate<Item> requirements = null;
         public int ItemAmount => items.Count(x => x != null);
 
-        public event EventHandler<Item[]> ItemChanged;
+        public event EventHandler<InventorySlotChangedArgs> ItemChanged;
 
         public InventorySlot(Predicate<Item> requirements = null)
         {
@@ -22,6 +22,7 @@ namespace Wanderer.Items
 
         public bool DoesItemMeetRequirements(Item item) => requirements.Invoke(item);
 
+        #region Item Actions
         public TryInsertResult TryInsertItem(Item item)
         {
             if (requirements != null)
@@ -36,7 +37,7 @@ namespace Wanderer.Items
                 if (Items[i] != null) { continue; }
                 if (isItemSmall) { IsQuadSlot = true; }
                 items[i] = item;
-                ItemChanged?.Invoke(this, items);
+                ItemChanged?.Invoke(this, new InventorySlotChangedArgs(InventorySlotChangedArgs.ChangeType.Added, item));
                 return TryInsertResult.Success;
             }
 
@@ -45,18 +46,19 @@ namespace Wanderer.Items
 
         public void ForceInsertItem(Item item)
         {
+            InventorySlotChangedArgs args = new InventorySlotChangedArgs(InventorySlotChangedArgs.ChangeType.Added, item);
             for (int i = 0; i < Items.Length; i++)
             {
                 if (Items[i] != null) { continue; }
                 if (item.GetHandler().IsSmall) { IsQuadSlot = true; }
                 items[i] = item;
-                ItemChanged?.Invoke(this, items);
+                ItemChanged?.Invoke(this, args);
                 return;
             }
             RemoveItem(items[0]);
             if (item.GetHandler().IsSmall) { IsQuadSlot = true; }
             items[0] = item;
-            ItemChanged?.Invoke(this, items);
+            ItemChanged?.Invoke(this, args);
         }
 
         public bool TrySwappingItems(Item localItem, Item tradeItem, ref InventorySlot tradeSlot)
@@ -90,15 +92,16 @@ namespace Wanderer.Items
                     }
                     isEmpty = false;
                 }
-                
+
             }
             if (isEmpty)
             {
                 IsQuadSlot = false;
             }
             if (!isRemoved && !ignoreError) { throw new Exception($"Item '{item.ToString()}' for Removal not found"); }
-            ItemChanged?.Invoke(this, items);
+            ItemChanged?.Invoke(this, new InventorySlotChangedArgs(InventorySlotChangedArgs.ChangeType.Removed, item));
         }
+        #endregion
 
         public bool IsQuadSlot
         {

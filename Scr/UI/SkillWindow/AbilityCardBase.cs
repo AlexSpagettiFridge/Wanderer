@@ -3,6 +3,7 @@ using Wanderer.Abilities;
 
 namespace Wanderer.Ui.SkillWindow
 {
+    [Tool]
     /// <summary>
     /// Common code for drawing Ability Cards
     /// </summary>

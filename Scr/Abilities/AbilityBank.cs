@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Wanderer.Abilities.DefaultAbilities;
 
 namespace Wanderer.Abilities
 {
@@ -10,14 +11,15 @@ namespace Wanderer.Abilities
 
         internal static void Init()
         {
-
+            RegisterHandler(new BasicAttack());
         }
 
         public static void RegisterHandler(AbilityHandler handler)
         {
-            handler.Id = handlers.Count;
             handlers.Add(handler);
         }
         public static AbilityHandler Find(Predicate<AbilityHandler> predicate) => handlers.Find(predicate);
+
+        public static AbilityHandler GetByName(string name) => Find((x) => x.Name == name);
     }
 }

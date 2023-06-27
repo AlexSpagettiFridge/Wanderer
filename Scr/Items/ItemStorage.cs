@@ -7,6 +7,7 @@ namespace Wanderer.Items
     {
         private List<InventorySlot> inventory = new List<InventorySlot>();
         private List<Item> droppedItems = new List<Item>();
+        public event EventHandler<InventorySlotChangedArgs> SlotItemChanged;
 
         public ItemStorage(int size)
         {
@@ -17,9 +18,29 @@ namespace Wanderer.Items
         {
             foreach (Predicate<Item> requirement in requirements)
             {
-                inventory.Add(new InventorySlot(requirement));
+                Add(new InventorySlot(requirement));
             }
             Size = size;
+        }
+
+        /// <summary>
+        /// Use this instead of inventory.Add(x). So events are automatically Updated.
+        /// </summary>
+        /// <param name="inventorySlot"></param>
+        private void Add(InventorySlot inventorySlot)
+        {
+            inventorySlot.ItemChanged += (x, y) => SlotItemChanged?.Invoke(x, y);
+            inventory.Add(inventorySlot);
+        }
+
+        /// <summary>
+        /// Same as <see cref="Add"/> but for inventory.Remove(x).
+        /// </summary>
+        /// <param name="inventorySlot"></param>
+        private void Remove(InventorySlot inventorySlot)
+        {
+            inventorySlot.ItemChanged -= (x, y) => SlotItemChanged?.Invoke(x, y);
+            inventory.Remove(inventorySlot);
         }
 
         public int Size
@@ -32,7 +53,7 @@ namespace Wanderer.Items
                 {
                     for (int index = originalCount - 1; index < value - 1; index++)
                     {
-                        inventory.Add(new InventorySlot());
+                        Add(new InventorySlot());
                     }
                 }
                 else
@@ -46,7 +67,7 @@ namespace Wanderer.Items
                                 droppedItems.Add(droppedSlotItem);
                             }
                         }
-                        inventory.Remove(inventory[index - 1]);
+                        Remove(inventory[index - 1]);
                     }
                 }
             }
@@ -70,6 +91,22 @@ namespace Wanderer.Items
         {
             get => inventory[x];
             set => inventory[x] = value;
+        }
+
+        public List<Item> GetAllItems()
+        {
+            List<Item> items = new List<Item>();
+            foreach(InventorySlot slot in inventory)
+            {
+                foreach(Item item in slot.Items)
+                {
+                    if (item!=null)
+                    {
+                        items.Add(item);
+                    }
+                }
+            }
+            return items;
         }
 
         public List<Item> FlushDroppedItems()
