@@ -110,7 +110,9 @@ namespace Wanderer.Ui
 
         public override bool _CanDropData(Vector2 atPosition, Variant data)
         {
-            return true;
+            JsonElement root = JsonDocument.Parse((string)data).RootElement;
+            if (!root.TryGetProperty("DataType", out JsonElement dataTypeElement)){return false;}
+            return dataTypeElement.ToString()=="Item";
         }
 
         public override Variant _GetDragData(Vector2 atPosition)
@@ -121,6 +123,7 @@ namespace Wanderer.Ui
                 return "";
             }
             JsonNode jsonNode = JsonNode.Parse("{}");
+            jsonNode["DataType"] = "Item";
             jsonNode["ControlPath"] = GetPath().ToString();
             jsonNode["Item"] = (JsonNode)item.GetJson();
             string serializedJson = JsonSerializer.Serialize(jsonNode);

@@ -48,11 +48,11 @@ namespace Wanderer.Abilities
 
         #region Json
         public JsonNode GetJson() => JsonSerializer.SerializeToNode(this);
-        public static Ability CreateFromJson(JsonDocument json)
+        public static Ability CreateFromJson(JsonDocument json) => CreateFromJson(json.RootElement);
+        public static Ability CreateFromJson(JsonElement json)
         {
-            JsonElement root = json.RootElement;
-            if (!root.TryGetProperty("HandlerName", out JsonElement handlerNameElement) ||
-                !root.TryGetProperty("SourceItem", out JsonElement sourceItemElement)
+            if (!json.TryGetProperty("HandlerName", out JsonElement handlerNameElement) ||
+                !json.TryGetProperty("SourceItem", out JsonElement sourceItemElement)
             ) { return null; }
 
             AbilityHandler abilityHandler = AbilityBank.GetByName(handlerNameElement.GetString());
