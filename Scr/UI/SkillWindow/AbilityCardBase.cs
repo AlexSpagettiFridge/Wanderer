@@ -32,6 +32,8 @@ namespace Wanderer.Ui.SkillWindow
         public override void _Draw()
         {
             DrawTextureRect(backgroundTexture, new Rect2(Vector2.Zero, Size), false);
+            if (shownAbility == null) { return; }
+            DrawTextureRect(shownAbility.GetHandler().GetIconTexture(shownAbility), new Rect2(0, 0, Size.X, Size.X), false);
         }
     }
 }

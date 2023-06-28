@@ -1,3 +1,4 @@
+using Godot;
 using Wanderer.Abilities.Costs;
 using Wanderer.Entities;
 
@@ -15,5 +16,7 @@ namespace Wanderer.Abilities.DefaultAbilities
         {
             throw new System.NotImplementedException();
         }
+
+        public override Texture2D GetIconTexture(Ability ability) => defaultIcons.GetFrameTexture("Icons", 0);
     }
 }
