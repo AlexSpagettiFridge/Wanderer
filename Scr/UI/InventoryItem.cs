@@ -124,7 +124,6 @@ namespace Wanderer.Ui
             jsonNode["ControlPath"] = GetPath().ToString();
             jsonNode["Item"] = (JsonNode)item.GetJson();
             string serializedJson = JsonSerializer.Serialize(jsonNode);
-            GD.Print(serializedJson);
             return serializedJson;
         }
 
