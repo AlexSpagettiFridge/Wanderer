@@ -18,18 +18,23 @@ namespace Wanderer.Entities
             StoppedWalking += OnWalkingStopped;
         }
 
-        public override void _UnhandledInput(InputEvent @event)
+        public override void _Input(InputEvent @event)
         {
-            if (@event.IsActionPressed("gm_skill1"))
+            // Handling Ability usage
+            int skillPress = -1;
+            if (@event.IsAction("gm_skill1")) { skillPress = 0; }
+            if (@event.IsAction("gm_skill2")) { skillPress = 1; }
+            if (@event.IsAction("gm_skill3")) { skillPress = 2; }
+            if (@event.IsAction("gm_skill4")) { skillPress = 3; }
+            if (@event.IsAction("gm_skill5")) { skillPress = 4; }
+            if (skillPress == -1) { return; }
+            if (@event.IsPressed())
             {
-                Item weapon = Util.GameData.HeroData.Equipment[0].Items[0];
-                if (weapon != null)
-                {
-                    if (weapon.GetHandler() is ItemWeapon weaponHandler)
-                    {
-                        weaponHandler.Attack(this, weapon);
-                    }
-                }
+                Util.GameData.HeroData.Abilities[skillPress]?.TryInvoke(this);
+            }
+            else
+            {
+                Util.GameData.HeroData.Abilities[skillPress]?.Release(this);
             }
         }
 

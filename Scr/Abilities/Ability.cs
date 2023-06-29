@@ -19,6 +19,7 @@ namespace Wanderer.Abilities
             this.sourceItem = sourceItem;
         }
         public AbilityHandler GetHandler() => handler;
+        
         public bool TryInvoke(Hero hero)
         {
             AbilityCost cost = handler.GetCost(this);
@@ -27,6 +28,8 @@ namespace Wanderer.Abilities
             cost.PayCost();
             return true;
         }
+        public void Release(Hero hero) => handler.Release(this, hero);
+
         #region cooldown
         private bool isCooldownLocked = false;
         public event Action<float> CooldownSet;

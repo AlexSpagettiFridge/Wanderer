@@ -14,7 +14,7 @@ namespace Wanderer.Abilities.DefaultAbilities
 
         public override void Invoke(Ability ability, Hero hero)
         {
-            throw new System.NotImplementedException();
+            GD.Print("Moo");
         }
 
         public override Texture2D GetIconTexture(Ability ability) => defaultIcons.GetFrameTexture("Icons", 0);

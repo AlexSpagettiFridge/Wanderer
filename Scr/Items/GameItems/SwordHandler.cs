@@ -10,11 +10,6 @@ namespace Wanderer.Items.GameItems
         private readonly SpriteFrames spriteFrames = ResourceLoader.Load<SpriteFrames>("res://Gfx/Items/Items.tres");
         public override string Name => "Sword";
 
-        public override void Attack(Hero hero, Item item)
-        {
-            GD.Print("Swert -|======>");
-        }
-
         public override Texture2D GetTexture(Item item) => spriteFrames.GetFrameTexture("Items32", 3);
 
         public override List<Ability> AllowAbilities(Item item)

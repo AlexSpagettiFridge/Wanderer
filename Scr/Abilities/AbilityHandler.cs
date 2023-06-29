@@ -10,6 +10,7 @@ namespace Wanderer.Abilities
         protected readonly string name;
         public string Name => name;
         public abstract void Invoke(Ability ability, Hero hero);
+        public virtual void Release(Ability abilty, Hero hero) { }
         public abstract AbilityCost GetCost(Ability ability);
         public abstract float GetCooldown(Ability ability);
         public abstract Texture2D GetIconTexture(Ability ability);
@@ -24,6 +25,6 @@ namespace Wanderer.Abilities
         /// </summary>
         /// <param name="sourceItem"></param>
         /// <returns></returns>
-        public Ability Create(Item sourceItem = null) => new Ability(this,sourceItem);
+        public Ability Create(Item sourceItem = null) => new Ability(this, sourceItem);
     }
 }
