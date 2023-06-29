@@ -10,12 +10,18 @@ namespace Wanderer.Ui.SkillWindow
         [Export]
         private int index = 0;
 
+        public override void _Ready()
+        {
+            shownAbility = Util.GameData.HeroData.Abilities[index];
+        }
+
         public override void _GuiInput(InputEvent @event)
         {
             if (@event is InputEventMouseButton inputEventMouseButton)
             {
                 if (inputEventMouseButton.Pressed && inputEventMouseButton.ButtonIndex == MouseButton.Right)
                 {
+                    Util.GameData.HeroData.Abilities[index] = null;
                     shownAbility = null;
                 }
             }
@@ -32,7 +38,9 @@ namespace Wanderer.Ui.SkillWindow
         {
             JsonElement root = JsonDocument.Parse((string)data).RootElement;
             if (!root.TryGetProperty("Ability", out JsonElement abilityElement)) { return; }
-            shownAbility = Ability.CreateFromJson(abilityElement);
+            Ability ability = Ability.CreateFromJson(abilityElement);
+            Util.GameData.HeroData.Abilities[index] = ability;
+            shownAbility = ability;
         }
 
     }
