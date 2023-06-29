@@ -55,7 +55,6 @@ namespace Wanderer.Ui
             Theme inheritedTheme = Util.GetInheritedTheme(this);
             themeSeparation.X = inheritedTheme.GetConstant("h_separation", "GridContainer");
             themeSeparation.Y = inheritedTheme.GetConstant("v_separation", "GridContainer");
-            GD.Print(themeSeparation);
         }
     }
 
