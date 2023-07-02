@@ -9,13 +9,27 @@ namespace Wanderer.Entities
 
     internal partial class Hero : CharacterBody2D
     {
+        bool isRegeneratingStamina = false;
         private const float Speed = 120, Acceleration = 1700, Friction = 900;
+        private double staminaRechargeCooldown = 0;
         public event Action StoppedWalking;
         private double walkTime;
 
         public Hero()
         {
             StoppedWalking += OnWalkingStopped;
+
+        }
+
+        public override void _Ready()
+        {
+            Util.GameData.HeroData.Stamina.ValueChanged += (sender,args)=>
+            {
+                if (sender is HeroResource stamina)
+                {
+                    if (stamina.Value<args.OldValue) {staminaRechargeCooldown = 2;}
+                }
+            };
         }
 
         public override void _Input(InputEvent @event)
@@ -40,6 +54,12 @@ namespace Wanderer.Entities
 
         public override void _Process(double delta)
         {
+            staminaRechargeCooldown-=delta;
+            while (staminaRechargeCooldown<0)
+            {
+                staminaRechargeCooldown += 0.5f;
+                Util.GameData.HeroData.Stamina.Value+=25;
+            }
             Vector2 movementInput = new Vector2(
                 Input.GetAxis("gm_left", "gm_right"),
                 Input.GetAxis("gm_up", "gm_down")

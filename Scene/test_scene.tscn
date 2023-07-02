@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://rkpeh08t2ar5"]
+[gd_scene load_steps=10 format=3 uid="uid://rkpeh08t2ar5"]
 
 [ext_resource type="Script" path="res://Scr/Entities/Hero.cs" id="1_f7q88"]
 [ext_resource type="Texture2D" uid="uid://ik2f1wcpi2et" path="res://icon.svg" id="2_c2bli"]
+[ext_resource type="Theme" uid="uid://cot5dkla4hfc8" path="res://Gfx/UI/UITheme.tres" id="3_nk88k"]
 [ext_resource type="Script" path="res://Scr/UI/GameUserInterface.cs" id="3_p4id2"]
 [ext_resource type="PackedScene" uid="uid://bov56evh8x3ml" path="res://Scene/UI/player_inventory.tscn" id="4_hy1my"]
 [ext_resource type="PackedScene" uid="uid://ch2m4pxrbi68h" path="res://Scene/ground_tile.tscn" id="5_4u3t0"]
 [ext_resource type="PackedScene" uid="uid://csqilb7mk6x8p" path="res://Scene/UI/skill_window.tscn" id="5_vb3p3"]
+[ext_resource type="Script" path="res://Scr/UI/Gui/HeroResourceBar.cs" id="7_hv6jc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i31le"]
 size = Vector2(32, 32)
@@ -27,16 +29,33 @@ zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Gui" type="Control" parent="CanvasLayer"]
+[node name="Gui" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("staminaBar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_nk88k")
 script = ExtResource("3_p4id2")
+staminaBar = NodePath("VBoxContainer/HBoxContainer/StaminaBar")
 psInventoryWindow = ExtResource("4_hy1my")
 psSkillWindow = ExtResource("5_vb3p3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Gui"]
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Gui/VBoxContainer"]
+layout_mode = 2
+
+[node name="StaminaBar" type="ProgressBar" parent="CanvasLayer/Gui/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+value = 50.0
+show_percentage = false
+script = ExtResource("7_hv6jc")
 
 [node name="GroundTile" parent="." instance=ExtResource("5_4u3t0")]
 position = Vector2(24, 63)

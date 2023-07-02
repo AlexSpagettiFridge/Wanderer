@@ -15,10 +15,12 @@ namespace Wanderer.Info
             absoluteMax = max;
         }
 
-        public void Exhaust(int amount, float exhaustion = .1f)
+        public void Exhaust(int amount, float exhaustion = .025f)
         {
+            float oldValue = value;
             value = Math.Max(0, value - amount);
-            max = (int)Math.Ceiling(Math.Max(0, value - amount * exhaustion));
+            ValueChanged?.Invoke(this, new HeroResourceChangedArgs(HeroResourceChangedArgs.ChangeType.Value, oldValue));
+            Max = (int)Math.Ceiling(Math.Max(0, Max - amount * exhaustion));
         }
         public void Restore(float amount) { value = Math.Min(max, value + amount); }
 
@@ -29,7 +31,7 @@ namespace Wanderer.Info
             set
             {
                 float oldValue = this.value;
-                this.value = Math.Clamp(value, 0, max);
+                this.value = Math.Clamp((float)value, 0, max);
                 ValueChanged?.Invoke(this, new HeroResourceChangedArgs(HeroResourceChangedArgs.ChangeType.Value, oldValue));
             }
         }
