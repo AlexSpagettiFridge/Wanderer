@@ -62,6 +62,11 @@ namespace Wanderer.Entities
             }
         }
 
+        public Vector2 GetAimDirection()
+        {
+            return Position.DirectionTo(GetGlobalMousePosition());
+        }
+
         private void OnWalkingStopped()
         {
             //Position = (Position / 4).Round() * 4;

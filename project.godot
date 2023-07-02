@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://Scr/Info/GameData.cs"
+TimerService="*res://Scr/Info/TimerService.cs"
 
 [dotnet]
 

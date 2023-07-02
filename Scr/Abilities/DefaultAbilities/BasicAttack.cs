@@ -1,6 +1,7 @@
 using Godot;
 using Wanderer.Abilities.Costs;
 using Wanderer.Entities;
+using Wanderer.Entities.Projectiles;
 
 namespace Wanderer.Abilities.DefaultAbilities
 {
@@ -14,7 +15,10 @@ namespace Wanderer.Abilities.DefaultAbilities
 
         public override void Invoke(Ability ability, Hero hero)
         {
-            GD.Print("Moo");
+            Util.TimerService.AddTimer(0.3f).Timeout += () =>
+            {
+                hero.AddChild(new SwordSwoosh(Mathf.DegToRad(45), hero.GetAimDirection().Angle(), 10, 30));
+            };
         }
 
         public override Texture2D GetIconTexture(Ability ability) => defaultIcons.GetFrameTexture("Icons", 0);
